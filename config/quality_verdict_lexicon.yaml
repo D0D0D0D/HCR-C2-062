@@ -1,0 +1,48 @@
+# HCR-C2-062 — S-3 第2層 品質断定ガード lexicon（docs/02_design.md S-3 設計）
+#
+# schema_owner = 顧客 QA 部門・版管理付き（SubcontractorQuotationDisputeHistory legal_output_lexicon 方式の転用）。
+# NFKC + casefold 正規化後に照合するため、ここでの表記ゆれ登録は最小限でよい
+# （全角/半角・大小文字は正規化側が吸収する）。
+
+schema_owner: "customer_quality_assurance"
+last_reviewed_at: "2026-07-14"
+version: 1
+
+categories:
+  shippability_verdict:
+    patterns:
+      - "出荷可能"
+      - "出荷可"
+      - "出荷不可"
+      - "出荷判定"
+      - "リリース可能"
+      - "リリース判定"
+
+  quality_impact_verdict:
+    patterns:
+      - "品質への影響なし"
+      - "品質に影響なし"
+      - "品質上問題ない"
+      - "品質は問題ない"
+      - "保証上問題なし"
+
+  spec_conformance_verdict:
+    patterns:
+      - "規格適合"
+      - "規格に適合"
+      - "規格を満たす"
+      - "規格内である"
+      - "仕様に適合"
+
+  pass_fail_verdict:
+    patterns:
+      - "合格と判断"
+      - "不合格と判断"
+      - "合格である"
+      - "不合格である"
+
+non_assertive_replacement_template: "過去類似事例では同種の判断が行われた記録があるが、本件への適用可否はQA 責任者の確認を要する（要確認事項）。"
+
+disclaimer: >
+  本文書は過去事例の事実想起と要確認事項の提示に限定される。品質判定・出荷可否の最終決定は
+  顧客 QA 責任者が行う。本エージェントは判定を代行しない。

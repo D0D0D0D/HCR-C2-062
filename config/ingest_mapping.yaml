@@ -1,0 +1,37 @@
+# HCR-C2-062 — QMS エクスポート列名 -> 正規フィールド名マッピング
+# （docs/02_design.md Design 入場条件 #2）
+#
+# 顧客サイトごとに追加・上書きできる（TrackWise / Veeva Vault QMS / MasterControl
+# で同一概念でも列名が異なる）。schema_owner = 顧客QA 部門。
+# {canonical_field: customer_column_name}
+
+schema_owner: "customer_quality_assurance"
+version: 1
+
+deviation:
+  source_record_id: "Deviation Number"
+  occurred_on: "Date Occurred"
+  event_summary: "Event Description"
+  deviation_category: "Deviation Category"
+  process_type: "Process Area"
+  root_cause_class: "Root Cause Classification"
+  severity_class: "Severity"
+  equipment_class: "Equipment Type"
+  product_class: "Product Type"
+  rca_summary: "Root Cause Summary"
+
+capa:
+  capa_id: "CAPA Number"
+  deviation_id: "Related Deviation Number"
+  capa_type: "CAPA Type"
+  action_class: "Action Category"
+  action_summary: "Action Description"
+  owner_role: "Responsible Role"
+  implemented_on: "Implementation Date"
+
+effectiveness:
+  capa_id: "CAPA Number"
+  checked_on: "Verification Date"
+  effective: "Effective (Y/N)"
+  recurrence_observed: "Recurrence Observed (Y/N)"
+  evidence_note: "Verification Notes"

@@ -1,0 +1,45 @@
+# HCR-C2-062 — 逸脱分類体系（docs/02_design.md Design 入場条件 #1）
+#
+# schema_owner: 顧客QA 部門（顧客サイトごとに追加・改称できる。コード変更不要）
+# 未知の値は "unclassified" に落として missing_data_flags に記録する（推測で埋めない）。
+
+schema_owner: "customer_quality_assurance"
+version: 1
+
+deviation_category:
+  - process          # 製造工程逸脱
+  - equipment        # 設備・機器
+  - material         # 原材料・資材
+  - testing          # 試験・検査
+  - utility          # 環境・ユーティリティ
+  - documentation    # 文書・記録
+  - training         # 教育訓練
+  - cleaning         # 清掃・洗浄・交叉汚染
+
+process_type:
+  - weighing               # 秤量
+  - mixing_granulation      # 混合・造粒
+  - compression_filling     # 打錠・充填
+  - packaging_labeling      # 包装・表示
+  - sterilization           # 滅菌
+  - aseptic                 # 無菌操作
+  - storage_dispatch        # 保管・出庫
+  - cleaning                # 洗浄
+  - utility                 # 用水・空調
+
+root_cause_class:  # 5M1E
+  - man
+  - machine
+  - material
+  - method
+  - measurement
+  - environment
+
+severity_class:
+  - critical
+  - major
+  - minor
+
+capa_type:
+  - corrective   # 是正
+  - preventive   # 予防

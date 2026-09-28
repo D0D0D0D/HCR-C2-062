@@ -1,0 +1,20 @@
+# Agent Manifest — AgentRegistry entry point
+# Static manifest only. Runtime tunables live in config/config.yaml.
+
+id: "HCR-C2-062"
+name: "GMP Manufacturing Deviation & CAPA Report Drafting Agent"
+namespace: "hcr"
+version: "1.0.0"
+enabled: true
+category: "Cat 2"
+# Static generation contract. Omitted by legacy templates defaults to deterministic.
+# This AG drives its LLM stage through the config["llm"] injection seam (BaseLLM), so the
+# truthful declaration is llm — omitting it would record an LLM template as deterministic.
+generation_mode: "llm"  # deterministic | llm
+industry: "HCR"
+base_type: "AgentBaseGraph"
+class: "src.graph.graph.GmpDeviationCapaGraph"
+required_trust_level: "VERIFIED_EXTERNAL"
+requires:
+  extras: []
+  secrets: []

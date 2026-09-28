@@ -1,0 +1,23 @@
+# Runtime configuration — HCR-C2-062
+# Runtime-tunable parameters live here, NOT in the agent.yaml manifest.
+
+max_retry: 3
+timeout_s: 60
+
+# HITL (D6 interrupt) — checkpointer is mandatory for pause/resume
+memory_enabled: true
+hitl:
+  enabled: true
+  # 安全弁のみ。QA 担当との refine 対話（壁打ち）を回数で縛る意図ではない。
+  max_hitl: 12
+
+# 入力サイズ上限（checkpoint 肥大 / DoS 対策）— S-2
+ingest:
+  max_file_bytes: 10485760      # 10 MiB / file
+  max_batch_records: 500
+  max_free_text_chars: 20000    # 自由記述フィールドの長さ上限（プロンプトインジェクション面積の抑制）
+
+# Stage 2 retrieval (tenant-scoped, fail-closed)
+retrieval:
+  top_k_similar_deviations: 8
+  min_similarity: 0.55

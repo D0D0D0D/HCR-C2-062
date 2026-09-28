@@ -1,0 +1,23 @@
+# HCR-C2-062 — CAPA 計画テンプレート（docs/02_design.md Design 入場条件 #4）
+
+schema_owner: "customer_quality_assurance"
+version: 1
+
+sections:
+  - id: "corrective_action"
+    title: "是正処置"
+    fields: ["action_summary", "action_class", "owner_role", "due_date"]
+
+  - id: "preventive_action"
+    title: "予防処置"
+    fields: ["action_summary", "action_class", "owner_role", "due_date"]
+
+  - id: "effectiveness_check_plan"
+    title: "有効性確認の方法と基準"
+    fields: ["check_method", "check_criteria", "planned_check_date"]
+
+  - id: "past_effectiveness_evidence"
+    title: "過去の同型 CAPA の有効性実績（根拠付き）"
+    fields: ["similar_capa_cases", "effectiveness_summary"]
+    source: "stage2"
+    requires_citation: true

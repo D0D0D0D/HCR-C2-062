@@ -1,0 +1,55 @@
+# HCR-C2-062 — 逸脱調査報告書テンプレート（docs/02_design.md Design 入場条件 #4）
+#
+# セクション 6（影響評価）には品質判定・出荷可否に相当するフィールドを
+# 一切定義しない（S-3 第1層・構造制約）。schema_owner = 顧客QA 部門。
+
+schema_owner: "customer_quality_assurance"
+version: 1
+
+sections:
+  - id: "1_identification"
+    title: "逸脱の識別"
+    fields: ["source_record_id", "occurred_on", "discoverer_role", "process_type"]
+    source: "stage1"
+
+  - id: "2_event_description"
+    title: "事象の記述"
+    fields: ["event_narrative", "timeline"]
+    source: "stage3"
+    requires_citation: true
+
+  - id: "3_affected_scope"
+    title: "影響を受けた対象"
+    fields: ["product_class", "process_type", "equipment_class"]
+    source: "stage1"
+
+  - id: "4_immediate_action"
+    title: "応急措置"
+    fields: ["immediate_action_summary"]
+    source: "stage3"
+    on_missing: "missing_data_flags"
+
+  - id: "5_root_cause_analysis"
+    title: "調査・根本原因分析（5 Whys / 5M1E）"
+    fields: ["rca_hypothesis", "five_whys", "root_cause_class"]
+    source: "stage3"
+    presentation: "hypothesis_only"   # 断定しない
+
+  - id: "6_impact_assessment"
+    title: "影響評価"
+    # 🔴 品質判定・出荷可否フィールドは一切定義しない（S-3 第1層）。
+    fields: ["similar_past_case_facts", "open_questions"]
+    source: "stage3"
+    prohibited_fields: ["quality_verdict", "shippability", "release_decision", "pass_fail"]
+
+  - id: "7_recurrence_risk"
+    title: "類似逸脱・再発リスク"
+    fields: ["similar_deviations", "capa_effectiveness_history", "recurrence_flags"]
+    source: ["stage2", "stage4"]
+    recurrence_flag_computation: "deterministic"   # LLM 判定禁止
+
+  - id: "8_evidence_map"
+    title: "根拠マップ"
+    fields: ["evidence_map"]
+    source: ["stage3", "stage4"]
+    required: true
